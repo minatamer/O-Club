@@ -1,0 +1,26 @@
+.meeting-details {
+    position: relative;
+    left: 37%;
+    
+}
+
+.about-us{
+    color: white;
+    position: relative;
+    top: 200px;
+    left: 50px;
+    width: 30%;
+}
+
+.login{
+    position: relative;
+    left: 40%;
+    bottom: 100px;
+
+}
+
+.home-title {
+    color: white;
+    text-align: center;
+    border-style: solid;
+}
