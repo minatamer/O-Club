@@ -21,7 +21,7 @@
 
     </head>
 
-    <body>
+
 
 
 <body>
@@ -45,7 +45,8 @@
                         <h5 class="mb-0">Login</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                    <form method="post" action="{{route('login')}}">
+                    {{csrf_field()}}
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
@@ -56,16 +57,23 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button type="submit" class="btn btn-secondary">Login</button>
-                                <a href="#" class="btn btn-link">Forgot Password</a>
-                                <a href="#" class="btn btn-link">Not a user?</a>
+                                <a href="forgotpassword" class="btn btn-link">Forgot Password</a>
+                                <a href="guest" class="btn btn-link">Not a user?</a>
                             </div>
-                        </form>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+        @if (session()->has('status'))
+        <div class="alert alert-success" role="alert">{{session()->get('status')}}  </div>
+        @endif
+        @if (session()->has('error'))
+        <div class="alert alert-danger" role="alert">{{session()->get('error')}}  </div>
+        @endif
+
 </body>
    
-    </body>
+
 </html>

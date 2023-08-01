@@ -16,23 +16,38 @@
     
     
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">O-Club</a>
+    <a class="navbar-brand" href="#">Welcome {{ session('username') }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+        <li class="nav-item ">
+                <a class="nav-link " href="http://127.0.0.1:8000/user">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/user/projectsandservices">Projects and Services</a>
+            </li>
             <li class="nav-item ">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link active" href="http://127.0.0.1:8000/user/bookameeting">Book a Meeting</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="http://127.0.0.1:8000/user/moneytransaction">Money Transaction</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
+                <a class="nav-link" href="http://127.0.0.1:8000/user/financialhistory">Financial History</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="bookameeting">Book a Meeting</a>
+            <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/user/benefits">Benefits</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/user/problem">Report Problem</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000/user/feedback">Report Feedback</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://127.0.0.1:8000">Sign Out</a>
             </li>
         </ul>
     </div>
