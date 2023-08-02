@@ -9,4 +9,5 @@ class System_Accounts extends Model
 {
     use HasFactory;
     protected $primaryKey = 'username';
+    public $timestamps = false;
 }

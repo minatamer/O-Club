@@ -9,4 +9,5 @@ class Projects_and_Services extends Model
 {
     use HasFactory;
     protected $primaryKey = 'prod_id';
+    public $timestamps = false;
 }

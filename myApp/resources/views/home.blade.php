@@ -12,7 +12,7 @@
 
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;

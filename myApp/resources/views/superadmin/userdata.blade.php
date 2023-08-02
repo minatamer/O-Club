@@ -11,7 +11,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
         body {
-          background-image: url('background2.png');
+          background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -69,8 +69,8 @@
   <ul class="list-group list-group-flush">
     @foreach ($users as $user)
     <li class="list-group-item">Username:  {{ $user->username}}</li>
-    <li class="list-group-item">Password: {{$user->password}}</li>
-    <li class="list-group-item">Email: {{$user->email}} </li>
+    <li class="list-group-item">Password: {{Crypt::decrypt($user->password)}}</li>
+    <li class="list-group-item">Email: {{Crypt::decrypt($user->email)}} </li>
     <li class="list-group-item">Mobile: {{$user->mobile}} </li>
     <li class="list-group-item">Manager:  {{$user->manager}}</li>
     @endforeach

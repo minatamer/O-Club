@@ -13,33 +13,54 @@ use App\Models\Financial_History;
 use App\Models\Money_Transaction;
 use App\Models\System_Accounts;
 use App\Models\Team_Calendar;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
     //
 
+    public function userChecker(Request $request){
+        if (session()->get('key') != 'User'){
+            $request->session()->flash('error','Cannot access this page' );
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
+
     public function viewBriefs(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         return view('user' , ['briefs'=> Brief::where('user_id' , $userid)->get() , 'users' => User::where('user_id' , $userid)->get()]);
     }
 
     public function changePassword(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         $user = User::find($userid);
         $user->timestamps = false;
-        $user->password = $request->password;
+        $user->password = Crypt::encrypt($request->password);
         $user->save();
 
         $account = System_Accounts::where('username' , $username)->first();
-        $account->password = $request->password;
+        $account->password =Crypt::encrypt($request->password);
         $account->timestamps = false;
         $account->save();
         return redirect('http://127.0.0.1:8000/user/');
     }
 
     public function changeMobile(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         $user = User::find($userid);
@@ -50,6 +71,9 @@ class UserController extends Controller
     }
 
     public function viewBenefits(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         return view('user.benefits' , ['benefits'=> Benefit::where('user_id' , $userid)->get()]);
@@ -57,6 +81,9 @@ class UserController extends Controller
     }
 
     public function redeemBenefit(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         $benefit = Benefit::where('user_id' , $userid)->where('benefit_id' , $request->benefit)->first();
@@ -67,14 +94,23 @@ class UserController extends Controller
     }
 
     public function viewProjects(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         return view('user.projectsandservices' , ['projects'=> Projects_and_Services::all()]);
     }
 
     public function viewProjects2(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         return view('user.bookameeting' , ['projects'=> Projects_and_Services::all()]);
     }
 
     public function reportProblem (Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
 
@@ -89,6 +125,9 @@ class UserController extends Controller
     }
 
     public function giveFeedback(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
 
@@ -102,6 +141,9 @@ class UserController extends Controller
     }
 
     public function viewHistory(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $query1 = Financial_History::where('sender' , $username)->get();
         $query2 =Financial_History::where('receiver' , $username)->get();
@@ -110,12 +152,18 @@ class UserController extends Controller
     }
 
     public function viewTransactions(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $query1 = Money_Transaction::where('sender' , $username)->get();
         return view('user.moneytransaction' , ['transactions'=>  $query1 ]);
     }
 
     public function doTransaction (Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         
         $history = new Financial_History;
@@ -147,6 +195,9 @@ class UserController extends Controller
     }
 
     public function submitMeeting(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         //save entries to the team table database
         $username = session()->get('username');
         $datetime = $request->get('datetime');
@@ -175,6 +226,9 @@ class UserController extends Controller
     }
 
     public function cancelSlot(Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         $date = Brief::where('user_id' , $userid)->where('brief_id' , $request->slot)->value('date');
@@ -185,6 +239,9 @@ class UserController extends Controller
     }
 
     public function editSlot (Request $request){
+        if ($this->userChecker($request) == false ){
+            return view('home');
+        }
         $username = session()->get('username');
         $userid = User::where('username' , $username)->value('user_id');
         $date = Brief::where('user_id' , $userid)->where('brief_id' , $request->slotID)->value('date');

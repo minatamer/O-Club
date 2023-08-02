@@ -11,7 +11,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -86,7 +86,7 @@
   <div class="card">
        <div class="card-header">Add Account Manager</div>
         <div class="card-body">
-          <form action="{{route('addManager')}}" method="post">
+          <form action="{{route('addManager-Admin')}}" method="post">
                     {{csrf_field()}}
 
                         <div class="form-group">
@@ -107,7 +107,7 @@
   <div class="card">
        <div class="card-header">Delete Account Manager</div>
         <div class="card-body">
-          <form action="{{route('deleteManager')}}" method="post">
+          <form action="{{route('deleteManager-Admin')}}" method="post">
                     {{csrf_field()}}
 
                         <div class="form-group">

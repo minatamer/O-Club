@@ -11,7 +11,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -74,7 +74,7 @@
   <div class="card">
        <div class="card-header">Add Project</div>
         <div class="card-body">
-          <form action="{{route('addProject')}}" method="post">
+          <form action="{{route('addProject-Admin')}}" method="post">
                     {{csrf_field()}}
 
                         <div class="form-group">
@@ -83,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label> 
-                            <input type="text" name="description" id="description" class="form-control" required>
+                            <input type="text" rows="4" name="description" id="description" class="form-control" required>
                         </div>
 
 
@@ -97,7 +97,7 @@
   <div class="card">
        <div class="card-header">Delete Project</div>
         <div class="card-body">
-          <form action="{{route('deleteProject')}}" method="post">
+          <form action="{{route('deleteProject-Admin')}}" method="post">
                     {{csrf_field()}}
 
                         <div class="form-group">
@@ -115,7 +115,7 @@
   <div class="card">
        <div class="card-header">Edit Project</div>
         <div class="card-body">
-          <form action="{{route('editProject')}}" method="post">
+          <form action="{{route('editProject-Admin')}}" method="post">
                     {{csrf_field()}}
 
                     <div class="form-group">
@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">New Description</label>
-                            <input type="text" name="description" id="description" class="form-control" required>
+                            <textarea type="text" name="description" id="description" class="form-control" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Save</button>

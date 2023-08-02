@@ -11,7 +11,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -34,7 +34,7 @@
                 <a class="nav-link active" href="http://127.0.0.1:8000/user/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:8000/user/projectsandservices">Projects and Services</a>
+                <a class="nav-link" href="http://127.0.0.1:8000/user/projectsandservices/">Projects and Services</a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="http://127.0.0.1:8000/user/bookameeting">Book a Meeting</a>
@@ -139,8 +139,8 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Username:  {{ session('username') }}</li>
     @foreach ($users as $user)
-    <li class="list-group-item">Password: {{$user->password}}</li>
-    <li class="list-group-item">Email: {{$user->email}} </li>
+    <li class="list-group-item">Password: {{Crypt::decrypt($user->password)}}</li>
+    <li class="list-group-item">Email: {{Crypt::decrypt($user->email)}} </li>
     <li class="list-group-item">Mobile: {{$user->mobile}} </li>
     <li class="list-group-item">Manager:  {{$user->manager}}</li>
     @endforeach

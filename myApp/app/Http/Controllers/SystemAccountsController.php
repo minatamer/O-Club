@@ -7,11 +7,14 @@ use App\Models\System_Accounts;
 use App\Models\User;
 use App\Models\Benefit;
 use App\Models\Forgot_Password;
-use App\Mail\MailNotify;
-use Mail;
+use App\Mail\ForgotPassword;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class SystemAccountsController extends Controller
 {
@@ -23,15 +26,15 @@ class SystemAccountsController extends Controller
         $password = $request->firstname.'123';
 
         $newAccount->username = $request->username;
-        $newAccount->password = $password;
-        $newAccount->email = $request->email;
+        $newAccount->password = Crypt::encrypt($password);
+        $newAccount->email = Crypt::encrypt($request->email);
         $newAccount->type = 'User';
         $newAccount->timestamps = false;
         $newAccount->save();
 
         $newUser->username = $request->username;
-        $newUser->password = $password;
-        $newUser->email = $request->email;
+        $newUser->password = Crypt::encrypt($password);
+        $newUser->email = Crypt::encrypt($request->email);
         $newUser->timestamps = false;
         $newUser->save();
 
@@ -71,22 +74,26 @@ class SystemAccountsController extends Controller
     public function login (Request $request){
         $username = $request->username;
         $password = $request->password;
-        $exists = System_Accounts::where('username' , $username)->where('password', $password)->exists();
+        $user = System_Accounts::where('username' , $username)->first();
         $usernameDB = System_Accounts::where('username' , $username)->value('username');   
         $passwordDB = System_Accounts::where('username' , $username)->value('password');   
 
-        if ($exists) {
-            $type =  System_Accounts::where('username' , $username)->where('password', $password)->value('type');
+
+        if ($user && $password == Crypt::decrypt($passwordDB)) {
+            $type =  $user->type;
             if($type == 'User'){
                 session(['username' => $username]);
+                session(['key' => 'User']);
                 return redirect('/user');
             }
             else if ($type == 'Admin'){
                 session(['username' => $username]);
+                session(['key' => 'Admin']);
                 return redirect('/admin');
             }
             else{
                 session(['username' => $username]);
+                session(['key' => 'Super Admin']);
                 return redirect('/superadmin');
             }
 
@@ -99,31 +106,41 @@ class SystemAccountsController extends Controller
 
     public function getTempPassword(Request $request){
         $email = $request->email;
-        if (System_Accounts::where('email' , $email)->where('type' , 'User')->exists()){
+        $allAccounts = System_Accounts::all();
+        $exists = '';
+        $username = '';
+        $encyptedEmail ='';
+        foreach ($allAccounts as $anAccount){
+            $accountEmail = Crypt::decrypt($anAccount->email);
+            if ($accountEmail == $request->email){
+                $exists =true;
+                $username = $anAccount->username;
+                $encyptedEmail = $anAccount->email;
+                break;
+
+            }
+        } 
+        if ($exists){
             $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
             $tempPassword = '';
             for ($i = 0; $i < 5; $i++) {
                 $tempPassword .= $characters[rand(0, strlen($characters) - 1)];
             }
+            
+            $encyptedPassword = Crypt::encrypt($tempPassword);
 
-            //SEND EMAIL WITH TEMPORARY PASSWORD
-            $data = [
-                'subject' => 'O-Club Forgot Password',
-                'body' => 'This is your Temporary password that you can sign in with: ' .$tempPassword
-            ];
-            try {
-                Mail::to($email)->send(new MailNotify($data));
-                $username = System_Accounts::where('email' , $email)->value('username');
-                $userid = User::where('username' , $username)->value('user_id');
-                $user = User::find($userid);
-                $user->timestamps = false;
-                $user->password = $tempPassword;
-                $user->save();
-        
-                $account = System_Accounts::where('username' , $username)->first();
-                $account->password = $tempPassword;
+            $account = System_Accounts::where('email' , $encyptedEmail)->first();
+                $account->password = $encyptedPassword;
                 $account->timestamps = false;
                 $account->save();
+                
+                $user = User::where('username' , $username)->first();
+                $user->timestamps = false;
+                $user->password = $encyptedPassword;
+                $user->save();
+        
+            try {
+                Mail::to($email)->send(new ForgotPassword($tempPassword));        
                 $request->session()->flash('status','Mail sent!' );
                 return redirect('http://127.0.0.1:8000/');
             } catch (Exception $th) {
@@ -137,7 +154,7 @@ class SystemAccountsController extends Controller
             $request->session()->flash('error','Mail doesnt exist' );
             return view('home');
         }
-
+        return redirect('http://127.0.0.1:8000/');
         
     }
 }

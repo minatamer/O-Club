@@ -9,4 +9,5 @@ class Brief extends Model
 {
     use HasFactory;
     protected $primaryKey = 'brief_id';
+    public $timestamps = false;
 }

@@ -11,7 +11,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -80,8 +80,8 @@
     <tr>
       <td>{{$user->user_id}}</td>
       <td>{{$user->username}}</td>
-      <td>{{$user->password}}</td>
-      <td>{{$user->email}}</td> 
+      <td>{{Crypt::decrypt($user->password)}}</td>
+      <td>{{Crypt::decrypt($user->email)}}</td> 
       <td>{{$user->mobile}}</td>
       <td>{{$user->manager}}</td>
     </tr>
@@ -103,6 +103,32 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">View</button>
+                    </form>
+                </div>
+            </div>
+</div>
+
+<div style="width:20%; float:left; ">
+  <div class="card">
+       <div class="card-header">Add User</div>
+        <div class="card-body">
+          <form action="{{ route('addUser') }}" method="post">
+                    {{csrf_field()}}
+
+                    <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label> 
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>
             </div>
@@ -139,6 +165,16 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Manager Email</label>
+                            <div>
+        <label for="dropdown">Type email of a Manager from the following choices:</label>
+        <!-- Dropdown Menu -->
+        <select id="dropdown" name="dropdown">
+        @foreach ($managers as $manager)
+            <option value="option">{{$manager->email}}</option>
+        @endforeach
+            <!-- You can add more options here -->
+        </select>
+    </div>
                             <input type="text" name="email" id="email" class="form-control">
                         </div>
 

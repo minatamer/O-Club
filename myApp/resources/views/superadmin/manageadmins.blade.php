@@ -11,7 +11,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -61,6 +61,9 @@
     </div>
 </nav>
 <br>
+@if (session()->has('error'))
+        <div class="alert alert-danger" role="alert">{{session()->get('error')}}  </div>
+        @endif
 
 <h3 style="color: white; border-style: solid;">List of all the Admins: </h3>
     <div>
@@ -79,8 +82,8 @@
     <tr>
       <td>{{$admin->admin_id}}</td>
       <td>{{$admin->username}}</td>
-      <td>{{$admin->password}}</td>
-      <td>{{$admin->email}}</td> 
+      <td>{{Crypt::decrypt($admin->password)}}</td>
+      <td>{{Crypt::decrypt($admin->email)}}</td> 
       <td>{{$admin->mobile}}</td>
     </tr>
     @endforeach
@@ -88,8 +91,10 @@
     </table>
 
     </div>
-    <div style="width:20%;  ">
-  <div class="card">
+
+<div >
+    <div style="width:20%;  display: inline-block ">
+        <div class="card">
        <div class="card-header">Add Admin</div>
         <div class="card-body">
           <form action="{{route('addAdmin')}}" method="post">
@@ -118,7 +123,7 @@
             </div>
 </div>
 
-<div style="width:20%; ">
+<div style="width:20%;  display: inline-block ">
   <div class="card">
        <div class="card-header">Delete Admin</div>
         <div class="card-body">
@@ -136,7 +141,7 @@
             </div>
 </div>
 
-<div style="width:40%;">
+<div style="width:40%;  display: inline-block">
   <div class="card">
        <div class="card-header">Edit Admin</div>
         <div class="card-body">
@@ -160,8 +165,117 @@
                     </form>
                 </div>
             </div>
+        </div>
 </div>
 
+
+<br>
+<br>
+
+<h3 style="color: white; border-style: solid;">List of all the Super Admins: </h3>
+
+<div>
+    <table class="table table-bordered bg-white">
+  <thead>
+    <tr>
+      <th scope="col">superadmin_id</th>
+      <th scope="col">username</th>
+      <th scope="col">password</th>
+      <th scope="col">email</th>
+      <th scope="col">mobile</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($superadmins as $superadmin)
+    <tr>
+      <td>{{$superadmin->superadmin_id}}</td>
+      <td>{{$superadmin->username}}</td>
+      <td>{{Crypt::decrypt($superadmin->password)}}</td>
+      <td>{{Crypt::decrypt($superadmin->email)}}</td> 
+      <td>{{$superadmin->mobile}}</td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+
+    </div>
+   
+
+    <div >
+    <div style="width:20%;  display: inline-block ">
+        <div class="card">
+       <div class="card-header">Add Super Admin</div>
+        <div class="card-body">
+          <form action="{{route('addSuperAdmin')}}" method="post">
+                    {{csrf_field()}}
+
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label> 
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" name="mobile" id="mobile" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">View</button>
+                    </form>
+                </div>
+            </div>
+</div>
+
+<div style="width:20%;  display: inline-block ">
+  <div class="card">
+       <div class="card-header">Delete Super Admin</div>
+        <div class="card-body">
+          <form action="{{route('deleteSuperAdmin')}}" method="post">
+                    {{csrf_field()}}
+
+                        <div class="form-group">
+                            <label for="superadminID">Super Admin ID</label>
+                            <input type="text" name="superadminID" id="superadminID" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+</div>
+
+<div style="width:40%;  display: inline-block">
+  <div class="card">
+       <div class="card-header">Edit Super Admin</div>
+        <div class="card-body">
+          <form action="{{route('editSuperAdmin')}}" method="post">
+                    {{csrf_field()}}
+
+                    <div class="form-group">
+                            <label for="superadminID">Admin ID</label>
+                            <input type="text" name="superadminID" id="superadminID" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">New Email</label>
+                            <input type="text" name="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">New Mobile</label>
+                            <input type="text" name="mobile" id="mobile" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
 
 
 

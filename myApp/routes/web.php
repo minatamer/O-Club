@@ -17,16 +17,27 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/user/bookameeting', [UserController::class, 'viewProjects2'])-> name('viewProjects2');
-
 Route::get('/guest', function () {
     return view('guest');
 });
+
+Route::get('/forgotpassword', function () {
+    return view('forgotpassword');
+});
+
+Route::post('/saveUserAccount', [SystemAccountsController::class, 'saveUserAccount'])-> name('saveUserAccount');
+
+Route::post('/login', [SystemAccountsController::class, 'login'])-> name('login');
+
+Route::post('/getTempPassword', [SystemAccountsController::class, 'getTempPassword'])-> name('getTempPassword');
+
+
+
+Route::get('/user/bookameeting', [UserController::class, 'viewProjects2'])-> name('viewProjects2');
 
 Route::get('/user', [UserController::class, 'viewBriefs'])-> name('user');
 
@@ -44,18 +55,8 @@ Route::get('/user/feedback', function () {
     return view('user.feedback');
 });
 
-Route::get('/forgotpassword', function () {
-    return view('forgotpassword');
-});
-
 
 Route::get('/user/benefits', [UserController::class, 'viewBenefits'])-> name('viewBenefits');
-
-Route::post('/saveUserAccount', [SystemAccountsController::class, 'saveUserAccount'])-> name('saveUserAccount');
-
-Route::post('/login', [SystemAccountsController::class, 'login'])-> name('login');
-
-Route::post('/getTempPassword', [SystemAccountsController::class, 'getTempPassword'])-> name('getTempPassword');
 
 Route::post('/submitMeeting', [UserController::class, 'submitMeeting'])-> name('submitMeeting');
 
@@ -77,11 +78,11 @@ Route::post('/editSlot', [UserController::class, 'editSlot'])-> name('editSlot')
 
 
 
-Route::get('/superadmin/manageusers', [SuperAdminController::class, 'viewUsers'])-> name('viewUsers');
+Route::get('/superadmin/manageusers', [SuperAdminController::class, 'viewUsersandManagers'])-> name('viewUsersandManagers');
 
 Route::get('/superadmin', [SuperAdminController::class, 'viewSlots'])-> name('viewSlots');
 
-Route::get('/superadmin/manageadmins', [SuperAdminController::class, 'viewAdmins'])-> name('viewAdmins');
+Route::get('/superadmin/manageadmins', [SuperAdminController::class, 'viewAdminsandSuperAdmins'])-> name('viewAdminsandSuperAdmins');
 
 Route::get('/superadmin/manageprojectsandservices', [SuperAdminController::class, 'viewProjects'])-> name('viewProjects');
 
@@ -95,6 +96,8 @@ Route::get('/superadmin/viewproblems', [SuperAdminController::class, 'viewProble
 
 Route::post('/viewUserData', [SuperAdminController::class, 'viewUserData'])-> name('viewUserData');
 
+Route::post('/addUser', [SuperAdminController::class, 'addUser'])-> name('addUser');
+
 Route::post('/deleteUser', [SuperAdminController::class, 'deleteUser'])-> name('deleteUser');
 
 Route::post('/assignManager', [SuperAdminController::class, 'assignManager'])-> name('assignManager');
@@ -104,6 +107,12 @@ Route::post('/deleteAdmin', [SuperAdminController::class, 'deleteAdmin'])-> name
 Route::post('/addAdmin', [SuperAdminController::class, 'addAdmin'])-> name('addAdmin');
 
 Route::post('/editAdmin', [SuperAdminController::class, 'editAdmin'])-> name('editAdmin');
+
+Route::post('/deleteSuperAdmin', [SuperAdminController::class, 'deleteSuperAdmin'])-> name('deleteSuperAdmin');
+
+Route::post('/addSuperAdmin', [SuperAdminController::class, 'addSuperAdmin'])-> name('addSuperAdmin');
+
+Route::post('/editSuperAdmin', [SuperAdminController::class, 'editSuperAdmin'])-> name('editSuperAdmin');
 
 Route::post('/approveBrief', [SuperAdminController::class, 'approveBrief'])-> name('approveBrief');
 
@@ -123,7 +132,7 @@ Route::post('/editProject', [SuperAdminController::class, 'editProject'])-> name
 
 Route::get('/admin', [AdminController::class, 'viewSlots'])-> name('viewSlots');
 
-Route::get('/admin/manageusers', [AdminController::class, 'viewUsers'])-> name('viewUsers');
+Route::get('/admin/manageusers', [AdminController::class, 'viewUsersandManagers'])-> name('viewUsersandManagers');
 
 Route::get('/admin/manageprojectsandservices', [AdminController::class, 'viewProjects'])-> name('viewProjects');
 
@@ -135,22 +144,24 @@ Route::get('/admin/viewfeedback', [AdminController::class, 'viewFeedback'])-> na
 
 Route::get('/admin/viewproblems', [AdminController::class, 'viewProblems'])-> name('viewProblems');
 
-Route::post('/viewUserDataAdmin', [AdminController::class, 'viewUserData'])-> name('viewUserDataAdmin');
+Route::post('/viewUserData-Admin', [AdminController::class, 'viewUserData'])-> name('viewUserData-Admin');
 
-Route::post('/deleteUser', [AdminController::class, 'deleteUser'])-> name('deleteUser');
+Route::post('/addUser-Admin', [AdminController::class, 'addUser'])-> name('addUser-Admin');
 
-Route::post('/assignManager', [AdminController::class, 'assignManager'])-> name('assignManager');
+Route::post('/deleteUser-Admin', [AdminController::class, 'deleteUser'])-> name('deleteUser-Admin');
 
-Route::post('/approveBrief', [AdminController::class, 'approveBrief'])-> name('approveBrief');
+Route::post('/assignManager-Admin', [AdminController::class, 'assignManager'])-> name('assignManager-Admin');
 
-Route::post('/denyBrief', [AdminController::class, 'denyBrief'])-> name('denyBrief');
+Route::post('/approveBrief-Admin', [AdminController::class, 'approveBrief'])-> name('approveBrief-Admin');
 
-Route::post('/addManager', [AdminController::class, 'addManager'])-> name('addManager');
+Route::post('/denyBrief-Admin', [AdminController::class, 'denyBrief'])-> name('denyBrief-Admin');
 
-Route::post('/deleteManager', [AdminController::class, 'deleteManager'])-> name('deleteManager');
+Route::post('/addManager-Admin', [AdminController::class, 'addManager'])-> name('addManager-Admin');
 
-Route::post('/deleteProject', [AdminController::class, 'deleteProject'])-> name('deleteProject');
+Route::post('/deleteManager-Admin', [AdminController::class, 'deleteManager'])-> name('deleteManager-Admin');
 
-Route::post('/addProject', [AdminController::class, 'addProject'])-> name('addProject');
+Route::post('/deleteProject-Admin', [AdminController::class, 'deleteProject'])-> name('deleteProject-Admin');
 
-Route::post('/editProject', [AdminController::class, 'editProject'])-> name('editProject');
+Route::post('/addProject-Admin', [AdminController::class, 'addProject'])-> name('addProject-Admin');
+
+Route::post('/editProject-Admin', [AdminController::class, 'editProject'])-> name('editProject-Admin');

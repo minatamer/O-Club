@@ -9,4 +9,5 @@ class Benefit extends Model
 {
     use HasFactory;
     protected $primaryKey = 'benefit_id';
+    public $timestamps = false;
 }

@@ -12,7 +12,7 @@
 
         <style>
         body {
-          background-image: url('background2.png');
+            background-image: url('{{ asset('background2.png') }}');
           background-repeat: no-repeat;
           background-size: cover;
           background-color: grey;
@@ -34,7 +34,8 @@
 
     <h3 style="color:white; text-align:center">Forgot Password</h3>
     <h4 style="color:white;">Simply enter your email associated with your account and press submit. You will be sent an email 
-        with a temporary password that you can sign in right away with and then change it whenever you want.
+        with a temporary password that you can sign in right away with and then change it whenever you want. <br>
+        Please note that this might take up to a minute.
     </h4>
 
     <div style="width:30%; float:left; left:35%; position:relative; ">
