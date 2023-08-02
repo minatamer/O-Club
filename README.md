@@ -7,5 +7,5 @@ step 1: php artisan migrate
 <br>
 step 2: php artisan db:seed
 <br>
-(before step 3 make sure to run your xampp control panel as admin)
+(before step 3 make sure to run your xampp control panel as admin) <br>
 step 3: php artisan serve
