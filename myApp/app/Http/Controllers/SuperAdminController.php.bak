@@ -261,7 +261,7 @@ class SuperAdminController extends Controller
 
 
         $admin = Admin::where('username' , $username)->first();
-        $admin->email = Crypt::encrypt($request->email);
+        $admin->email = $request->email;
         $admin->mobile = $request->mobile;
         $admin->timestamps = false;
         $admin->save();
