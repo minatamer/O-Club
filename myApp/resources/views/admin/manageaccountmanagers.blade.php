@@ -83,7 +83,7 @@
   <div class="card">
        <div class="card-header">Add Account Manager</div>
         <div class="card-body">
-          <form action="{{route('addManager')}}" method="post">
+          <form action="{{route('addManager-Admin')}}" method="post">
                     {{csrf_field()}}
 
                         <div class="form-group">
@@ -104,7 +104,7 @@
   <div class="card">
        <div class="card-header">Delete Account Manager</div>
         <div class="card-body">
-          <form action="{{route('deleteManager')}}" method="post">
+          <form action="{{route('deleteManager-Admin')}}" method="post">
                     {{csrf_field()}}
 
                         <div class="form-group">
