@@ -66,8 +66,8 @@
   <ul class="list-group list-group-flush">
     @foreach ($users as $user)
     <li class="list-group-item">Username:  {{ $user->username}}</li>
-    <li class="list-group-item">Password: {{$user->password}}</li>
-    <li class="list-group-item">Email: {{$user->email}} </li>
+    <li class="list-group-item">Password: {{Crypt::decrypt($user->password)}}</li>
+    <li class="list-group-item">Email: {{Crypt::decrypt($user->email)}} </li>
     <li class="list-group-item">Mobile: {{$user->mobile}} </li>
     <li class="list-group-item">Manager:  {{$user->manager}}</li>
     @endforeach
