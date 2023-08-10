@@ -35,6 +35,7 @@ Route::post('/login', [SystemAccountsController::class, 'login'])-> name('login'
 
 Route::post('/getTempPassword', [SystemAccountsController::class, 'getTempPassword'])-> name('getTempPassword');
 
+Route::get('/signOut', [SystemAccountsController::class, 'signOut'])-> name('signOut');
 
 
 Route::get('/user/bookameeting', [UserController::class, 'viewProjects2'])-> name('viewProjects2');

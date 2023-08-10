@@ -52,7 +52,7 @@
                 <a class="nav-link active" href= "http://127.0.0.1:8000/admin/viewproblems">View Problems</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://127.0.0.1:8000">Sign Out</a>
+                <a class="nav-link" href="{{ route('signOut') }}">Sign Out</a>
             </li>
         </ul>
     </div>
