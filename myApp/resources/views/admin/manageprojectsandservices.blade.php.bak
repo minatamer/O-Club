@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">New Description</label>
-                            <input type="text" name="description" id="description" class="form-control" required>
+                            <textarea type="text" name="description" id="description" class="form-control" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Save</button>
