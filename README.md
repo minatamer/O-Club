@@ -16,9 +16,13 @@ step 5: php artisan db:seed
 (before step 3 make sure to run your xampp control panel as admin) <br>
 step 6: php artisan serve
 <br>
+<br> 
+Note about the website
+<br>
+To start, you will either need to signup for a user account, or use the already made staple accounts for admin and superadmin that will be in your database once you do step 5. 
 
 
-Note about the Selenium tests
+Notes about how to run the Selenium tests
 <br>
 1.make sure you have python downloaded on your device from https://www.python.org/downloads/ to be able to use pip commands (make sure when you install python to check the setting "add python to PATH")<br>
 2.open command prompt and type: pip install selenium <br>
@@ -27,3 +31,7 @@ Note about the Selenium tests
 PATH = "your\path\to\chromedriver.exe"
 <br>
 driver = webdriver.Chrome(PATH)
+<br>
+<br>
+There are 3 seperate test files for each user type in the website. Every website functionality has its own python function that you will need to run to let selenium simulate it. <br>
+At the bottom of each python file I wrote and commented all the functions that you can execute.
