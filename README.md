@@ -14,7 +14,6 @@ step 4: php artisan db:seed
 (before step 3 make sure to run your xampp control panel as admin) <br>
 step 4: php artisan serve
 <br>
-<br>
 Note about the Selenium tests:
 <br>
 1. in command prompt: pip install selenium
