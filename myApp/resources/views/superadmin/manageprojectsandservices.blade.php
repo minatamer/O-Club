@@ -122,16 +122,16 @@
                     {{csrf_field()}}
 
                     <div class="form-group">
-                            <label for="projID">Project ID</label>
-                            <input type="text" name="projID" id="projID" class="form-control" required>
+                            <label for="projID2">Project ID</label>
+                            <input type="text" name="projID2" id="projID2" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="name">New Name</label>
-                            <input type="text" name="name" id="name" class="form-control" required>
+                            <label for="newName">New Name</label>
+                            <input type="text" name="newName" id="newName" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="description">New Description</label>
-                            <input type="text" name="description" id="description" class="form-control" required>
+                            <label for="newDescription">New Description</label>
+                            <input type="text" name="newDescription" id="newDescription" class="form-control" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Save</button>

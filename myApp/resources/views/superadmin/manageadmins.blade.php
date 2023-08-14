@@ -67,7 +67,7 @@
 
 <h3 style="color: white; border-style: solid;">List of all the Admins: </h3>
     <div>
-    <table class="table table-bordered bg-white">
+    <table class="table table-bordered bg-white" id="adminTable" name="adminTable">
   <thead>
     <tr>
       <th scope="col">admin_id</th>
@@ -117,7 +117,7 @@
                             <input type="text" name="mobile" id="mobile" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">View</button>
+                        <button type="submit" class="btn btn-primary">Add Admin</button>
                     </form>
                 </div>
             </div>
@@ -135,7 +135,7 @@
                             <input type="text" name="adminID" id="adminID" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete Admin</button>
                     </form>
                 </div>
             </div>
@@ -150,18 +150,18 @@
 
                     <div class="form-group">
                             <label for="adminID">Admin ID</label>
-                            <input type="text" name="adminID" id="adminID" class="form-control" required>
+                            <input type="text" name="adminID2" id="adminID2" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="email">New Email</label>
-                            <input type="text" name="email" id="email" class="form-control" required>
+                            <input type="text" name="newEmail" id="newEmail" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="mobile">New Mobile</label>
-                            <input type="text" name="mobile" id="mobile" class="form-control" required>
+                            <input type="text" name="newMobile" id="newMobile" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Save Admin</button>
                     </form>
                 </div>
             </div>
@@ -175,7 +175,7 @@
 <h3 style="color: white; border-style: solid;">List of all the Super Admins: </h3>
 
 <div>
-    <table class="table table-bordered bg-white">
+    <table class="table table-bordered bg-white" id="superAdminTable">
   <thead>
     <tr>
       <th scope="col">superadmin_id</th>
@@ -210,23 +210,23 @@
                     {{csrf_field()}}
 
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" required>
+                            <label for="superAdminUsername">Username</label>
+                            <input type="text" name="superAdminUsername" id="superAdminUsername" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label> 
-                            <input type="password" name="password" id="password" class="form-control" required>
+                            <label for="superAdminPassword">Password</label> 
+                            <input type="password" name="superAdminPassword" id="superAdminPassword" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" class="form-control" required>
+                            <label for="superAdminEmail">Email</label>
+                            <input type="text" name="superAdminEmail" id="superAdminEmail" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="mobile">Mobile</label>
-                            <input type="text" name="mobile" id="mobile" class="form-control" required>
+                            <label for="superAdminMobile">Mobile</label>
+                            <input type="text" name="superAdminMobile" id="superAdminMobile" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">View</button>
+                        <button type="submit" class="btn btn-primary">Add Super Admin</button>
                     </form>
                 </div>
             </div>
@@ -244,7 +244,7 @@
                             <input type="text" name="superadminID" id="superadminID" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete Super Admin</button>
                     </form>
                 </div>
             </div>
@@ -258,19 +258,19 @@
                     {{csrf_field()}}
 
                     <div class="form-group">
-                            <label for="superadminID">Admin ID</label>
-                            <input type="text" name="superadminID" id="superadminID" class="form-control" required>
+                            <label for="superadminID2">Super Admin ID</label>
+                            <input type="text" name="superadminID2" id="superadminID2" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">New Email</label>
-                            <input type="text" name="email" id="email" class="form-control" required>
+                            <label for="newSuperAdminEmail">New Email</label>
+                            <input type="text" name="newSuperAdminEmail" id="newSuperAdminEmail" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="mobile">New Mobile</label>
-                            <input type="text" name="mobile" id="mobile" class="form-control" required>
+                            <label for="newSuperAdminMobile">New Mobile</label>
+                            <input type="text" name="newSuperAdminMobile" id="newSuperAdminMobile" class="form-control" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Save Super Admin</button>
                     </form>
                 </div>
             </div>

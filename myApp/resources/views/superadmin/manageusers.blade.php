@@ -142,8 +142,8 @@
                     {{csrf_field()}}
 
                         <div class="form-group">
-                            <label for="userID">User ID</label>
-                            <input type="text" name="userID" id="userID" class="form-control">
+                            <label for="userID2">User ID</label>
+                            <input type="text" name="userID2" id="userID2" class="form-control">
                         </div>
 
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -160,8 +160,8 @@
                     {{csrf_field()}}
 
                         <div class="form-group">
-                            <label for="userID">User ID</label>
-                            <input type="text" name="userID" id="userID" class="form-control">
+                            <label for="userID3">User ID</label>
+                            <input type="text" name="userID3" id="userID3" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="email">Manager Email</label>
@@ -175,7 +175,7 @@
             <!-- You can add more options here -->
         </select>
     </div>
-                            <input type="text" name="email" id="email" class="form-control">
+                            <input type="text" name="managerEmail" id="managerEmail" class="form-control">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -110,8 +110,8 @@
                     {{csrf_field()}}
 
                         <div class="form-group">
-                            <label for="briefID">Brief ID</label>
-                            <input type="text" name="briefID" id="briefID" class="form-control" required>
+                            <label for="briefID2">Brief ID</label>
+                            <input type="text" name="briefID2" id="briefID2" class="form-control" required>
                         </div>
 
                         <button type="submit" class="btn btn-danger">Deny</button>

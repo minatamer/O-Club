@@ -116,31 +116,31 @@ class SuperAdminController extends Controller
         //TO DELETE A USER YOU NEED TO DELETE: their benefits, briefs, feedback, problem, FINANCIAL HISTORY AND MONEY TRANSACTION
         // THEN YOU NEED TO DELETE THE USER ITSELF AND THEN YOU CAN DELETE THE SYSTEM ACCOUNT
         
-        $username = User::where('user_id',$request->userID)->value('username');        
+        $username = User::where('user_id',$request->userID2)->value('username');        
         //DELETE BENEFIT
         try {
-            Benefit::where('user_id',$request->userID)->delete();
+            Benefit::where('user_id',$request->userID2)->delete();
         } catch (\Throwable $th) {
             //throw $th;
         }
 
         //DELETE Briefs
         try {
-            Brief::where('user_id',$request->userID)->delete();
+            Brief::where('user_id',$request->userID2)->delete();
         } catch (\Throwable $th) {
             //throw $th;
         }
 
         //DELETE FEEDBACK
         try {
-            Feedback::where('user_id',$request->userID)->delete();
+            Feedback::where('user_id',$request->userID2)->delete();
         } catch (\Throwable $th) {
             //throw $th;
         }
 
         //DELETE PROBELM
         try {
-            Problem::where('user_id',$request->userID)->delete();
+            Problem::where('user_id',$request->userID2)->delete();
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -148,7 +148,7 @@ class SuperAdminController extends Controller
 
         //DELETE USER
         try {
-            User::where('user_id',$request->userID)->delete();
+            User::where('user_id',$request->userID2)->delete();
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -193,8 +193,8 @@ class SuperAdminController extends Controller
         if ($this->userChecker($request) == false ){
             return view('home');
         }
-        $user = User::where('user_id' , $request->userID)->first();
-        $user->manager = $request->email;
+        $user = User::where('user_id' , $request->userID3)->first();
+        $user->manager = $request->managerEmail;
         $user->timestamps =false;
         $user->save();
         return view('superadmin/manageusers' , ['users'=> User::all() , 'managers' => Account_Manager::all()]);
@@ -251,18 +251,18 @@ class SuperAdminController extends Controller
         if ($this->userChecker($request) == false ){
             return view('home');
         }
-        $username = Admin::where('admin_id' , $request->adminID)->value('username');
+        $username = Admin::where('admin_id' , $request->adminID2)->value('username');
 
         $account =  System_Accounts::where('username' , $username)->first();
-        $account->email = Crypt::encrypt($request->email);
-        $account->mobile = $request->mobile;
+        $account->email = Crypt::encrypt($request->newEmail);
+        $account->mobile = $request->newMobile;
         $account->timestamps = false;
         $account->save();
 
 
         $admin = Admin::where('username' , $username)->first();
-        $admin->email = Crypt::encrypt($request->email);
-        $admin->mobile = $request->mobile;
+        $admin->email = Crypt::encrypt($request->newEmail);
+        $admin->mobile = $request->newMobile;
         $admin->timestamps = false;
         $admin->save();
         
@@ -290,20 +290,20 @@ class SuperAdminController extends Controller
             return view('home');
         }
         $account = new System_Accounts;
-        $account->username = $request->username;
-        $account->password = Crypt::encrypt($request->password);
-        $account->email = Crypt::encrypt($request->email);
-        $account->mobile = $request->mobile;
+        $account->username = $request->superAdminUsername;
+        $account->password = Crypt::encrypt($request->superAdminPassword);
+        $account->email = Crypt::encrypt($request->superAdminEmail);
+        $account->mobile = $request->superAdminMobile;
         $account->type = 'Super Admin';
         $account->timestamps = false;
         $account->save();
         
         
         $superadmin = new Super_Admin;
-        $superadmin->username = $request->username;
-        $superadmin->password = Crypt::encrypt($request->password);
-        $superadmin->email = Crypt::encrypt($request->email);
-        $superadmin->mobile = $request->mobile;
+        $superadmin->username = $request->superAdminUsername;
+        $superadmin->password = Crypt::encrypt($request->superAdminPassword);
+        $superadmin->email = Crypt::encrypt($request->superAdminEmail);
+        $superadmin->mobile = $request->superAdminMobile;
         $superadmin->timestamps = false;
         $superadmin->save();
         return view('superadmin/manageadmins' , ['admins'=> Admin::all() , 'superadmins'=>Super_Admin::all()]);
@@ -313,18 +313,18 @@ class SuperAdminController extends Controller
         if ($this->userChecker($request) == false ){
             return view('home');
         }
-        $username = Super_Admin::where('superadmin_id' , $request->superadminID)->value('username');
+        $username = Super_Admin::where('superadmin_id' , $request->superadminID2)->value('username');
 
         $account =  System_Accounts::where('username' , $username)->first();
-        $account->email = Crypt::encrypt($request->email);
-        $account->mobile = $request->mobile;
+        $account->email = Crypt::encrypt($request->newSuperAdminEmail);
+        $account->mobile = $request->newSuperAdminMobile;
         $account->timestamps = false;
         $account->save();
 
 
         $superadmin = Super_Admin::where('username' , $username)->first();
-        $superadmin->email = Crypt::encrypt($request->email);
-        $superadmin->mobile = $request->mobile;
+        $superadmin->email = Crypt::encrypt($request->newSuperAdminEmail);
+        $superadmin->mobile = $request->newSuperAdminMobile;
         $superadmin->timestamps = false;
         $superadmin->save();
         
@@ -368,9 +368,9 @@ class SuperAdminController extends Controller
         if ($this->userChecker($request) == false ){
             return view('home');
         }
-        $project = Projects_and_Services::where('prod_id' , $request->projID)->first();
-        $project->name = $request->name;
-        $project->description = $request->description;
+        $project = Projects_and_Services::where('prod_id' , $request->projID2)->first();
+        $project->name = $request->newName;
+        $project->description = $request->newDescription;
         $project->timestamps = false;
         $project->save();
         
@@ -401,7 +401,7 @@ class SuperAdminController extends Controller
         if ($this->userChecker($request) == false ){
             return view('home');
         }
-        $brief = Brief::where('brief_id' , $request->briefID)->first();
+        $brief = Brief::where('brief_id' , $request->briefID2)->first();
         $brief->status = 'Denied';
         $brief->timestamps = false;
         $brief->save();
@@ -435,13 +435,13 @@ class SuperAdminController extends Controller
             return view('home');
         }
         //REMOVE THEM FROM BEING ASSIGNED TO ANY USER FIRST
-        $users = User::where('manager' , $request->email)->get();
+        $users = User::where('manager' , $request->email2)->get();
         foreach ($users as $user) {
             $user->manager = null;
             $user->timestamps=false;
             $user->save();
         }
-        Account_Manager::where('email' , $request->email)->delete();
+        Account_Manager::where('email' , $request->email2)->delete();
         return view('superadmin/manageaccountmanagers' , ['managers'=> Account_Manager::all()]);
 
     }

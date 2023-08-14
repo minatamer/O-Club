@@ -180,7 +180,7 @@
                             <input type="text" name="mobile" id="mobile" class="form-control">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="changeMobileButton" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>

@@ -74,7 +74,7 @@
     {{csrf_field()}}
         <div class="form-group">
             <label for="datetime">Date and Time</label>
-            <input type="datetime-local" class="form-control col-md-3" id="datetime" name="datetime" required>
+            <input type="datetime-local" class="form-control col-md-3" id="datetime" name="datetime" max="9999-12-31T12:59" required>
         </div>
 
         <div>
