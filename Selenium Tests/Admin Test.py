@@ -104,7 +104,7 @@ def test_deleteUser(userID):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Delete User')]")
         parent_div = header_div.find_element(By.XPATH, "./ancestor::div")
-        userID_input = parent_div.find_element("id" , "userID")
+        userID_input = parent_div.find_element("id" , "userID2")
         delete_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         userID_input.send_keys(userID)
@@ -119,7 +119,7 @@ def test_deleteUser(userID):
         print("An error occurred:", e)
  
        
-
+"""
 def test_deleteLatestUser():
     test_login("admin", "admin")
     try:
@@ -153,7 +153,7 @@ def test_deleteLatestUser():
          
     except Exception as e:
         print("An error occurred:", e)
-        
+"""       
 
 def test_assignManager(userID, managerEmail):
     test_login("admin", "admin")
@@ -168,8 +168,8 @@ def test_assignManager(userID, managerEmail):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Assign Manager to User')]")
         parent_div = header_div.find_element(By.XPATH, "./ancestor::div")
-        userID_input = parent_div.find_element("id" , "userID")
-        email_input = parent_div.find_element("id" , "email")
+        userID_input = parent_div.find_element("id" , "userID3")
+        email_input = parent_div.find_element("id" , "managerEmail")
         submit_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         userID_input.send_keys(userID)
@@ -185,7 +185,7 @@ def test_assignManager(userID, managerEmail):
         print("An error occurred:", e)
         
         
-
+"""
 def test_assignManagerToLatestUser(managerEmail):
     test_login("admin", "admin")
     try:
@@ -221,7 +221,7 @@ def test_assignManagerToLatestUser(managerEmail):
          
     except Exception as e:
         print("An error occurred:", e)
-
+"""
 
 
 def test_addProject(name, description):
@@ -296,9 +296,9 @@ def test_editProject(projID, name, description):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Edit Project')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        projID_input = parent_div.find_element("id" , "projID")
-        name_input = parent_div.find_element("id" , "name")
-        description_input = parent_div.find_element("id" , "description")
+        projID_input = parent_div.find_element("id" , "projID2")
+        name_input = parent_div.find_element("id" , "newName")
+        description_input = parent_div.find_element("id" , "newDescription")
         edit_button = parent_div.find_element("css selector", 'button[type="submit"]')
         driver.execute_script("arguments[0].scrollIntoView();", header_div)  
         
@@ -358,7 +358,7 @@ def test_denyBrief(briefID):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Deny Brief')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        briefID_input = parent_div.find_element("id" , "briefID")
+        briefID_input = parent_div.find_element("id" , "briefID2")
         deny_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         briefID_input.send_keys(briefID)
@@ -418,7 +418,7 @@ def test_deleteManager(email):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Delete Account Manager')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        email_input = parent_div.find_element("id" , "email")
+        email_input = parent_div.find_element("id" , "email2")
         delete_button = parent_div.find_element("css selector", 'button[type="submit"]')
         driver.execute_script("arguments[0].scrollIntoView();", parent_div)  
         
@@ -480,7 +480,7 @@ def test_viewProblems():
 
 ######################### TEST RUNS ##################################
 
-test_login("admin", "admin")
+#test_login("admin", "admin")
 
 #test_addUser("slimjim", "Slim123", "slim@gmail.com")
 

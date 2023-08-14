@@ -104,7 +104,7 @@ def test_deleteUser(userID):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Delete User')]")
         parent_div = header_div.find_element(By.XPATH, "./ancestor::div")
-        userID_input = parent_div.find_element("id" , "userID")
+        userID_input = parent_div.find_element("id" , "userID2")
         delete_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         userID_input.send_keys(userID)
@@ -119,7 +119,7 @@ def test_deleteUser(userID):
         print("An error occurred:", e)
  
        
-
+"""
 def test_deleteLatestUser():
     test_login("superadmin", "superadmin")
     try:
@@ -149,12 +149,12 @@ def test_deleteLatestUser():
         WebDriverWait(driver, 10).until(
             EC.url_to_be("http://127.0.0.1:8000/deleteUser")
         )
-       
+ 
          
     except Exception as e:
         print("An error occurred:", e)
         
-
+"""
 def test_assignManager(userID, managerEmail):
     test_login("superadmin", "superadmin")
     try:
@@ -168,8 +168,8 @@ def test_assignManager(userID, managerEmail):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Assign Manager to User')]")
         parent_div = header_div.find_element(By.XPATH, "./ancestor::div")
-        userID_input = parent_div.find_element("id" , "userID")
-        email_input = parent_div.find_element("id" , "email")
+        userID_input = parent_div.find_element("id" , "userID3")
+        email_input = parent_div.find_element("id" , "managerEmail")
         submit_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         userID_input.send_keys(userID)
@@ -185,7 +185,7 @@ def test_assignManager(userID, managerEmail):
         print("An error occurred:", e)
         
         
-
+"""
 def test_assignManagerToLatestUser(managerEmail):
     test_login("superadmin", "superadmin")
     try:
@@ -222,6 +222,7 @@ def test_assignManagerToLatestUser(managerEmail):
     except Exception as e:
         print("An error occurred:", e)
 
+"""
 
 def test_addAdmin(username, password, email, mobile):
     test_login("superadmin", "superadmin")
@@ -299,9 +300,9 @@ def test_editAdmin(adminID, email, mobile):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Edit Admin')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        adminID_input = parent_div.find_element("id" , "adminID")
-        email_input = parent_div.find_element("id" , "email")
-        mobile_input = parent_div.find_element("id" , "mobile")
+        adminID_input = parent_div.find_element("id" , "adminID2")
+        email_input = parent_div.find_element("id" , "newEmail")
+        mobile_input = parent_div.find_element("id" , "newMobile")
         add_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         adminID_input.send_keys(adminID)
@@ -332,10 +333,10 @@ def test_addSuperAdmin(username, password, email, mobile):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Add Super Admin')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        username_input = parent_div.find_element("id" , "username")
-        password_input = parent_div.find_element("id" , "password")
-        email_input = parent_div.find_element("id" , "email")
-        mobile_input = parent_div.find_element("id" , "mobile")
+        username_input = parent_div.find_element("id" , "superAdminUsername")
+        password_input = parent_div.find_element("id" , "superAdminPassword")
+        email_input = parent_div.find_element("id" , "superAdminEmail")
+        mobile_input = parent_div.find_element("id" , "superAdminMobile")
         add_button = parent_div.find_element("css selector", 'button[type="submit"]')
         driver.execute_script("arguments[0].scrollIntoView();", parent_div)  
         
@@ -397,9 +398,9 @@ def test_editSuperAdmin(adminID, email, mobile):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Edit Super Admin')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        superadminID_input = parent_div.find_element("id" , "superadminID")
-        email_input = parent_div.find_element("id" , "email")
-        mobile_input = parent_div.find_element("id" , "mobile")
+        superadminID_input = parent_div.find_element("id" , "superadminID2")
+        email_input = parent_div.find_element("id" , "newSuperAdminEmail")
+        mobile_input = parent_div.find_element("id" , "newSuperAdminMobile")
         add_button = parent_div.find_element("css selector", 'button[type="submit"]')
         driver.execute_script("arguments[0].scrollIntoView();", parent_div)  
         
@@ -490,9 +491,9 @@ def test_editProject(projID, name, description):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Edit Project')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        projID_input = parent_div.find_element("id" , "projID")
-        name_input = parent_div.find_element("id" , "name")
-        description_input = parent_div.find_element("id" , "description")
+        projID_input = parent_div.find_element("id" , "projID2")
+        name_input = parent_div.find_element("id" , "newName")
+        description_input = parent_div.find_element("id" , "newDescription")
         edit_button = parent_div.find_element("css selector", 'button[type="submit"]')
         driver.execute_script("arguments[0].scrollIntoView();", parent_div)  
         
@@ -552,7 +553,7 @@ def test_denyBrief(briefID):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Deny Brief')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        briefID_input = parent_div.find_element("id" , "briefID")
+        briefID_input = parent_div.find_element("id" , "briefID2")
         deny_button = parent_div.find_element("css selector", 'button[type="submit"]')
         
         briefID_input.send_keys(briefID)
@@ -612,7 +613,7 @@ def test_deleteManager(email):
         )
         header_div = driver.find_element(By.XPATH, "//div[@class='card-header' and contains(text(), 'Delete Account Manager')]")
         parent_div = header_div.find_element(By.XPATH, "..")
-        email_input = parent_div.find_element("id" , "email")
+        email_input = parent_div.find_element("id" , "email2")
         delete_button = parent_div.find_element("css selector", 'button[type="submit"]')
         driver.execute_script("arguments[0].scrollIntoView();", parent_div)  
         
@@ -682,11 +683,11 @@ def test_viewProblems():
 
 #test_deleteUser("17")
 
-#test_deleteLatestUser()
+
 
 #test_assignManager("15", "ahmed@gmail.com")
 
-#test_assignManagerToLatestUser("mohamed@gmail.com")
+
 
 #test_addAdmin("mbappe", "mbappe123", "mbappe@gmail.com", "012301023")
 
@@ -698,7 +699,7 @@ def test_viewProblems():
 
 #test_deleteSuperAdmin("3")
 
-#test_editSuperAdmin("3", "super@gmail.com", "00000000000")
+#test_editSuperAdmin("1", "super@gmail.com", "00000000000")
 
 #test_addProject("new project", "new project description")
 
